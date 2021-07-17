@@ -7,6 +7,7 @@ jobs:
   convert_via_pandoc:
     runs-on: ubuntu-18.04
     steps:
+      - uses: actions/checkout@v2
       - uses: docker://pandoc/core:2.9
         with:
           args: pandoc -s assets/test-1.md -o test-1.html # gets appended to pandoc command
