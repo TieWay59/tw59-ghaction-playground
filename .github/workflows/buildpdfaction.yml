@@ -24,12 +24,11 @@ jobs:
           files: artifact/build-${{ github.run_id }}.html
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/checkout@v2 # access repo files
       - name: push new file
         run: |
           git config user.name TieWay59
           git config user.email tieway59@foxmail.com
-          git switch main
-          git fetch
           git add .
           git commit -m "action run_id ${{ github.run_id }}"
           git push
