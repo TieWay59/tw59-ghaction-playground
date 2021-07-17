@@ -9,4 +9,4 @@ jobs:
     steps:
       - uses: docker://pandoc/core:2.9
         with:
-          args: "--help" # gets appended to pandoc command
+          args: pandoc -s assets/test-1.md -o test-1.html # gets appended to pandoc command
