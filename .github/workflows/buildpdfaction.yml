@@ -12,7 +12,7 @@ jobs:
       - run: stamp=$(date +"%Y-%m-%d.H:%M:%S")
       - uses: docker://pandoc/core:2.9
         with:
-          args: pandoc -d PandocDefaults.yml -o build-${{ github.run_id }}.html
+          args: pandoc -d PandocDefaults.yml 
       - name: push new file
         run: |
           git config user.name TieWay59
