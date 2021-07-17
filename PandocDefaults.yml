@@ -2,4 +2,4 @@
 from: markdown+emoji
 to: html5
 input-file: assets/test-1.md
-output-file: ${..}/artifact/out.html # Bug：output-file不能带路径。
+output-file: artifact\\out.html # Bug：output-file不能带路径。
