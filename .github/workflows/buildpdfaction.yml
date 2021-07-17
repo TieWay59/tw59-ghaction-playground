@@ -13,13 +13,6 @@ jobs:
       - uses: docker://pandoc/core:2.9
         with:
           args: pandoc -d PandocDefaults.yml -o artifact/build-${{ github.run_id }}.html
-      - name: push new file
-        run: |
-          git config user.name TieWay59
-          git config user.email tieway59@foxmail.com
-          git add .
-          git commit -m "action run_id ${{ github.run_id }}"
-          git push
       - uses: actions/upload-artifact@master
         with:
           name: build-${{ github.run_id }}
@@ -31,3 +24,10 @@ jobs:
           files: artifact/build-${{ github.run_id }}.html
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: push new file
+        run: |
+          git config user.name TieWay59
+          git config user.email tieway59@foxmail.com
+          git add .
+          git commit -m "action run_id ${{ github.run_id }}"
+          git push
