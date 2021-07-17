@@ -18,5 +18,5 @@ jobs:
           git config user.name TieWay59
           git config user.email tieway59@foxmail.com
           git add .
-          git commit -m "generated"
+          git commit -m "action run_id ${{ github.run_id }}"
           git push
