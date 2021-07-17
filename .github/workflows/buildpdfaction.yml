@@ -7,7 +7,14 @@ jobs:
   convert_via_pandoc:
     runs-on: ubuntu-18.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v2 # access repo files
       - uses: docker://pandoc/core:2.9
         with:
           args: pandoc -s assets/test-1.md -o test-1.html # gets appended to pandoc command
+      - name: push new file
+        run: |
+          git config user.name TieWay59
+          git config user.email tieway59@foxmail.com
+          git add .
+          git commit -m "generated"
+          git push
