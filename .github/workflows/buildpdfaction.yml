@@ -24,3 +24,10 @@ jobs:
         with:
           name: build-${{ github.run_id }}
           path: artifact
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: artifact/build-${{ github.run_id }}.html
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
