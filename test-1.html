@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>test-1</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<h2 id="zjnu---2268-01-分数规划"><a href="http://10.7.88.76/CLanguage/showproblem?problem_id=2268">ZJNU - 2268</a> 0/1 分数规划</h2>
+<h3 id="题意">题意</h3>
+<p>给<span class="math inline"><em>n</em></span>个对象的<span class="math inline"><em>w</em><sub><em>i</em></sub></span>值和<span class="math inline"><em>t</em><sub><em>i</em></sub></span>值，和重量下界<span class="math inline"><em>W</em></span> ，取其中任意个对象，求：</p>
+<p><br /><span class="math display">$$
+Max(\frac{\sum t_k \times 1000}{\sum w_k})(\sum w_k&gt;W,k\in\{1\dots N \})
+$$</span><br /></p>
+<h3 id="思路">思路</h3>
+<p><a href="https://blog.csdn.net/niiick/article/details/80925267">0/1 分数规划 预备知识</a></p>
+<p>1 把题目公式化以后，我们可以做以下变形：</p>
+<p><br /><span class="math display">$$
+V=Max(\frac{\sum t_k \times 1000}{\sum w_k})
+$$</span><br /></p>
+<p><br /><span class="math display">$$
+V_{Max}=\frac{\sum t_k \times 1000}{\sum w_k}
+$$</span><br /></p>
+<p><br /><span class="math display"><em>V</em><sub><em>M</em><em>a</em><em>x</em></sub> × ∑<em>w</em><sub><em>k</em></sub> = ∑<em>t</em><sub><em>k</em></sub> × 1000</span><br /></p>
+<p><br /><span class="math display">∑<em>t</em><sub><em>k</em></sub> × 1000 − <em>V</em><sub><em>M</em><em>a</em><em>x</em></sub> × ∑<em>w</em><sub><em>k</em></sub> = 0</span><br /></p>
+<p>本题的目标是求<span class="math inline"><em>V</em><sub><em>M</em><em>a</em><em>x</em></sub></span> 。假如有一个可能的答案<span class="math inline"><em>V</em><sub><em>t</em></sub></span> ，</p>
+<p><br /><span class="math display">∑<em>t</em><sub><em>k</em></sub> × 1000 − <em>V</em><sub><em>t</em></sub> × ∑<em>w</em><sub><em>k</em></sub> = <em>Δ</em><em>x</em></span><br /></p>
+<p>先不提如何选出对象，假如最后<span class="math inline"><em>Δ</em><em>x</em> ≥ 0</span> 说明此解可行，或存在更优解；反之，此解不可行。我们可以通过二分的方法来实现这一过程。</p>
+<p>对于选择的过程，可以通过背包来检验答案。设<span class="math inline"><em>d</em><em>p</em>[<em>i</em>]</span>表示重量为<span class="math inline"><em>i</em></span>的对象组合，所具有的<span class="math inline"><em>Δ</em><em>x</em></span> 的最大值。但这里我们<strong><em>只需要</em></strong> 知道有没有一种可能，使得当前的解可行，所以计算最大值即可。</p>
+<blockquote>
+<p>注意：<span class="math inline"><em>Δ</em><em>x</em></span> 可能有负值，所以初始化要是<span class="math inline">$-\infin$</span></p>
+</blockquote>
+<p><br /><span class="math display"><em>d</em><em>p</em>[<em>k</em>] = <em>M</em><em>a</em><em>x</em>(<em>d</em><em>p</em>[<em>j</em>] + <em>t</em>[<em>i</em>] × 1000 + <em>V</em><sub><em>t</em></sub> × <em>w</em>[<em>i</em>], <em>d</em><em>p</em>[<em>k</em>]), (<em>j</em> ∈ {<em>W</em>…0})</span><br /></p>
+<p>注意到重量的数据范围有 1000000，但是在这个问题中，限制我们的只有<span class="math inline"><em>W</em></span>（范围只到 1000）。</p>
+<p>对于小于<span class="math inline"><em>W</em></span> 的组合，我们需要通过动态规划递推出一些组合，直到它们的重量超过<span class="math inline"><em>W</em></span> ；对于超过<span class="math inline"><em>W</em></span> 的那些组合，都放在<span class="math inline"><em>d</em><em>p</em>[<em>W</em>]</span> 更新也可以，因为我们我们只是在找能不能用当前<span class="math inline"><em>V</em><sub><em>t</em></sub></span> 得到非负的<span class="math inline"><em>Δ</em><em>x</em></span> 。</p>
+<p>综上，<strong><em>写一个二分，在 check 函数里背包一下就可以了。（一句话题解）</em></strong></p>
+<blockquote>
+<p>比如，<span class="math inline"><em>V</em><sub><em>t</em></sub> × <em>w</em><sub><em>i</em></sub></span> 的乘法可能会爆 int 之类的。</p>
+</blockquote>
+<p>复杂度：<span class="math inline"><em>N</em><em>W</em>log<sub>2</sub>(<em>K</em>)​</span></p>
+<h3 id="代码">代码</h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="pp">#include </span><span class="im">&lt;algorithm&gt;</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">using</span> <span class="kw">namespace</span> std;</span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> ll;</span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="at">const</span> <span class="dt">int</span> MAXN = <span class="dv">257</span>;</span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="at">const</span> ll INF = <span class="bn">0x3f3f3f3f</span>;</span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="dt">int</span> n,W;</span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="dt">int</span> ans;</span>
+<span id="cb1-9"><a href="#cb1-9"></a><span class="dt">int</span> w[MAXN],t[MAXN];</span>
+<span id="cb1-10"><a href="#cb1-10"></a>ll dp[<span class="dv">1007</span>];</span>
+<span id="cb1-11"><a href="#cb1-11"></a></span>
+<span id="cb1-12"><a href="#cb1-12"></a><span class="dt">bool</span> check(ll v){</span>
+<span id="cb1-13"><a href="#cb1-13"></a>    dp[<span class="dv">0</span>]=<span class="dv">0</span>;</span>
+<span id="cb1-14"><a href="#cb1-14"></a>    <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">1</span>;i&lt;=W;i++)</span>
+<span id="cb1-15"><a href="#cb1-15"></a>        dp[i]=-INF;</span>
+<span id="cb1-16"><a href="#cb1-16"></a>    <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">1</span>;i&lt;=n;i++)</span>
+<span id="cb1-17"><a href="#cb1-17"></a>        <span class="cf">for</span>(<span class="dt">int</span> k,j=W;j&gt;=<span class="dv">0</span>;j--)</span>
+<span id="cb1-18"><a href="#cb1-18"></a>            k=min(j+w[i],W),</span>
+<span id="cb1-19"><a href="#cb1-19"></a>            dp[k]=max(dp[j]+t[i]-v*w[i],dp[k]);</span>
+<span id="cb1-20"><a href="#cb1-20"></a>    <span class="cf">if</span>(dp[W]&gt;=<span class="dv">0</span>)<span class="cf">return</span> <span class="kw">true</span>;</span>
+<span id="cb1-21"><a href="#cb1-21"></a>    <span class="cf">return</span> <span class="kw">false</span>;</span>
+<span id="cb1-22"><a href="#cb1-22"></a>}</span>
+<span id="cb1-23"><a href="#cb1-23"></a><span class="dt">int</span> main(){</span>
+<span id="cb1-24"><a href="#cb1-24"></a>    ios::sync_with_stdio(<span class="dv">0</span>);</span>
+<span id="cb1-25"><a href="#cb1-25"></a>    cout.tie(<span class="dv">0</span>);cin.tie(<span class="dv">0</span>);</span>
+<span id="cb1-26"><a href="#cb1-26"></a>    cin&gt;&gt;n&gt;&gt;W;</span>
+<span id="cb1-27"><a href="#cb1-27"></a>    <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">1</span>;i&lt;=n;i++){</span>
+<span id="cb1-28"><a href="#cb1-28"></a>        cin&gt;&gt;w[i]&gt;&gt;t[i];</span>
+<span id="cb1-29"><a href="#cb1-29"></a>        t[i]*=<span class="dv">1000</span>;</span>
+<span id="cb1-30"><a href="#cb1-30"></a>    }</span>
+<span id="cb1-31"><a href="#cb1-31"></a>    ll mid,l=<span class="dv">0</span>,r=<span class="dv">250005</span>;</span>
+<span id="cb1-32"><a href="#cb1-32"></a>    <span class="cf">while</span>(l&lt;r){</span>
+<span id="cb1-33"><a href="#cb1-33"></a>        mid=(l+r+<span class="dv">1</span>)&gt;&gt;<span class="dv">1</span>;</span>
+<span id="cb1-34"><a href="#cb1-34"></a>        <span class="cf">if</span>(check(mid)){</span>
+<span id="cb1-35"><a href="#cb1-35"></a>            l=mid;</span>
+<span id="cb1-36"><a href="#cb1-36"></a>        }<span class="cf">else</span>{</span>
+<span id="cb1-37"><a href="#cb1-37"></a>            r=mid-<span class="dv">1</span>;</span>
+<span id="cb1-38"><a href="#cb1-38"></a>        }</span>
+<span id="cb1-39"><a href="#cb1-39"></a>    }</span>
+<span id="cb1-40"><a href="#cb1-40"></a>    cout&lt;&lt;l&lt;&lt;endl;</span>
+<span id="cb1-41"><a href="#cb1-41"></a>    <span class="cf">return</span> <span class="dv">0</span>;</span>
+<span id="cb1-42"><a href="#cb1-42"></a>}</span></code></pre></div>
+</body>
+</html>
