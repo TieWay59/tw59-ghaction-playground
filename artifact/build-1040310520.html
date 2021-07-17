@@ -1,0 +1,75 @@
+<h2 id="zjnu---2268-01-分数规划"><a href="http://10.7.88.76/CLanguage/showproblem?problem_id=2268">ZJNU - 2268</a> 0/1 分数规划</h2>
+<h3 id="题意">题意</h3>
+<p>给<span class="math inline"><em>n</em></span>个对象的<span class="math inline"><em>w</em><sub><em>i</em></sub></span>值和<span class="math inline"><em>t</em><sub><em>i</em></sub></span>值，和重量下界<span class="math inline"><em>W</em></span> ，取其中任意个对象，求：</p>
+<p><br /><span class="math display">$$
+Max(\frac{\sum t_k \times 1000}{\sum w_k})(\sum w_k&gt;W,k\in\{1\dots N \})
+$$</span><br /></p>
+<h3 id="思路">思路</h3>
+<p><a href="https://blog.csdn.net/niiick/article/details/80925267">0/1 分数规划 预备知识</a></p>
+<p>1 把题目公式化以后，我们可以做以下变形：</p>
+<p><br /><span class="math display">$$
+V=Max(\frac{\sum t_k \times 1000}{\sum w_k})
+$$</span><br /></p>
+<p><br /><span class="math display">$$
+V_{Max}=\frac{\sum t_k \times 1000}{\sum w_k}
+$$</span><br /></p>
+<p><br /><span class="math display"><em>V</em><sub><em>M</em><em>a</em><em>x</em></sub> × ∑<em>w</em><sub><em>k</em></sub> = ∑<em>t</em><sub><em>k</em></sub> × 1000</span><br /></p>
+<p><br /><span class="math display">∑<em>t</em><sub><em>k</em></sub> × 1000 − <em>V</em><sub><em>M</em><em>a</em><em>x</em></sub> × ∑<em>w</em><sub><em>k</em></sub> = 0</span><br /></p>
+<p>本题的目标是求<span class="math inline"><em>V</em><sub><em>M</em><em>a</em><em>x</em></sub></span> 。假如有一个可能的答案<span class="math inline"><em>V</em><sub><em>t</em></sub></span> ，</p>
+<p><br /><span class="math display">∑<em>t</em><sub><em>k</em></sub> × 1000 − <em>V</em><sub><em>t</em></sub> × ∑<em>w</em><sub><em>k</em></sub> = <em>Δ</em><em>x</em></span><br /></p>
+<p>先不提如何选出对象，假如最后<span class="math inline"><em>Δ</em><em>x</em> ≥ 0</span> 说明此解可行，或存在更优解；反之，此解不可行。我们可以通过二分的方法来实现这一过程。</p>
+<p>对于选择的过程，可以通过背包来检验答案。设<span class="math inline"><em>d</em><em>p</em>[<em>i</em>]</span>表示重量为<span class="math inline"><em>i</em></span>的对象组合，所具有的<span class="math inline"><em>Δ</em><em>x</em></span> 的最大值。但这里我们<strong><em>只需要</em></strong> 知道有没有一种可能，使得当前的解可行，所以计算最大值即可。</p>
+<blockquote>
+<p>注意：<span class="math inline"><em>Δ</em><em>x</em></span> 可能有负值，所以初始化要是<span class="math inline">$-\infin$</span></p>
+</blockquote>
+<p><br /><span class="math display"><em>d</em><em>p</em>[<em>k</em>] = <em>M</em><em>a</em><em>x</em>(<em>d</em><em>p</em>[<em>j</em>] + <em>t</em>[<em>i</em>] × 1000 + <em>V</em><sub><em>t</em></sub> × <em>w</em>[<em>i</em>], <em>d</em><em>p</em>[<em>k</em>]), (<em>j</em> ∈ {<em>W</em>…0})</span><br /></p>
+<p>注意到重量的数据范围有 1000000，但是在这个问题中，限制我们的只有<span class="math inline"><em>W</em></span>（范围只到 1000）。</p>
+<p>对于小于<span class="math inline"><em>W</em></span> 的组合，我们需要通过动态规划递推出一些组合，直到它们的重量超过<span class="math inline"><em>W</em></span> ；对于超过<span class="math inline"><em>W</em></span> 的那些组合，都放在<span class="math inline"><em>d</em><em>p</em>[<em>W</em>]</span> 更新也可以，因为我们我们只是在找能不能用当前<span class="math inline"><em>V</em><sub><em>t</em></sub></span> 得到非负的<span class="math inline"><em>Δ</em><em>x</em></span> 。</p>
+<p>综上，<strong><em>写一个二分，在 check 函数里背包一下就可以了。（一句话题解）</em></strong></p>
+<blockquote>
+<p>比如，<span class="math inline"><em>V</em><sub><em>t</em></sub> × <em>w</em><sub><em>i</em></sub></span> 的乘法可能会爆 int 之类的。</p>
+</blockquote>
+<p>复杂度：<span class="math inline"><em>N</em><em>W</em>log<sub>2</sub>(<em>K</em>)​</span></p>
+<h3 id="代码">代码</h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="pp">#include </span><span class="im">&lt;algorithm&gt;</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">using</span> <span class="kw">namespace</span> std;</span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> ll;</span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="at">const</span> <span class="dt">int</span> MAXN = <span class="dv">257</span>;</span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="at">const</span> ll INF = <span class="bn">0x3f3f3f3f</span>;</span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="dt">int</span> n,W;</span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="dt">int</span> ans;</span>
+<span id="cb1-9"><a href="#cb1-9"></a><span class="dt">int</span> w[MAXN],t[MAXN];</span>
+<span id="cb1-10"><a href="#cb1-10"></a>ll dp[<span class="dv">1007</span>];</span>
+<span id="cb1-11"><a href="#cb1-11"></a></span>
+<span id="cb1-12"><a href="#cb1-12"></a><span class="dt">bool</span> check(ll v){</span>
+<span id="cb1-13"><a href="#cb1-13"></a>    dp[<span class="dv">0</span>]=<span class="dv">0</span>;</span>
+<span id="cb1-14"><a href="#cb1-14"></a>    <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">1</span>;i&lt;=W;i++)</span>
+<span id="cb1-15"><a href="#cb1-15"></a>        dp[i]=-INF;</span>
+<span id="cb1-16"><a href="#cb1-16"></a>    <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">1</span>;i&lt;=n;i++)</span>
+<span id="cb1-17"><a href="#cb1-17"></a>        <span class="cf">for</span>(<span class="dt">int</span> k,j=W;j&gt;=<span class="dv">0</span>;j--)</span>
+<span id="cb1-18"><a href="#cb1-18"></a>            k=min(j+w[i],W),</span>
+<span id="cb1-19"><a href="#cb1-19"></a>            dp[k]=max(dp[j]+t[i]-v*w[i],dp[k]);</span>
+<span id="cb1-20"><a href="#cb1-20"></a>    <span class="cf">if</span>(dp[W]&gt;=<span class="dv">0</span>)<span class="cf">return</span> <span class="kw">true</span>;</span>
+<span id="cb1-21"><a href="#cb1-21"></a>    <span class="cf">return</span> <span class="kw">false</span>;</span>
+<span id="cb1-22"><a href="#cb1-22"></a>}</span>
+<span id="cb1-23"><a href="#cb1-23"></a><span class="dt">int</span> main(){</span>
+<span id="cb1-24"><a href="#cb1-24"></a>    ios::sync_with_stdio(<span class="dv">0</span>);</span>
+<span id="cb1-25"><a href="#cb1-25"></a>    cout.tie(<span class="dv">0</span>);cin.tie(<span class="dv">0</span>);</span>
+<span id="cb1-26"><a href="#cb1-26"></a>    cin&gt;&gt;n&gt;&gt;W;</span>
+<span id="cb1-27"><a href="#cb1-27"></a>    <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">1</span>;i&lt;=n;i++){</span>
+<span id="cb1-28"><a href="#cb1-28"></a>        cin&gt;&gt;w[i]&gt;&gt;t[i];</span>
+<span id="cb1-29"><a href="#cb1-29"></a>        t[i]*=<span class="dv">1000</span>;</span>
+<span id="cb1-30"><a href="#cb1-30"></a>    }</span>
+<span id="cb1-31"><a href="#cb1-31"></a>    ll mid,l=<span class="dv">0</span>,r=<span class="dv">250005</span>;</span>
+<span id="cb1-32"><a href="#cb1-32"></a>    <span class="cf">while</span>(l&lt;r){</span>
+<span id="cb1-33"><a href="#cb1-33"></a>        mid=(l+r+<span class="dv">1</span>)&gt;&gt;<span class="dv">1</span>;</span>
+<span id="cb1-34"><a href="#cb1-34"></a>        <span class="cf">if</span>(check(mid)){</span>
+<span id="cb1-35"><a href="#cb1-35"></a>            l=mid;</span>
+<span id="cb1-36"><a href="#cb1-36"></a>        }<span class="cf">else</span>{</span>
+<span id="cb1-37"><a href="#cb1-37"></a>            r=mid-<span class="dv">1</span>;</span>
+<span id="cb1-38"><a href="#cb1-38"></a>        }</span>
+<span id="cb1-39"><a href="#cb1-39"></a>    }</span>
+<span id="cb1-40"><a href="#cb1-40"></a>    cout&lt;&lt;l&lt;&lt;endl;</span>
+<span id="cb1-41"><a href="#cb1-41"></a>    <span class="cf">return</span> <span class="dv">0</span>;</span>
+<span id="cb1-42"><a href="#cb1-42"></a>}</span></code></pre></div>
