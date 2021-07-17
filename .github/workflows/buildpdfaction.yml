@@ -20,3 +20,7 @@ jobs:
           git add .
           git commit -m "action run_id ${{ github.run_id }}"
           git push
+      - uses: actions/upload-artifact@master
+        with:
+          name: build-${{ github.run_id }}
+          path: artifact
