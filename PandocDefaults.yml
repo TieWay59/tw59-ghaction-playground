@@ -1,5 +1,5 @@
 # src: https://www.pandoc.org/MANUAL.html#default-files
 from: markdown+emoji
-to: html5
+to: pdf
 input-file: assets/test-1.md
-output-file: artifact/build.html
+output-file: artifact/build.pdf

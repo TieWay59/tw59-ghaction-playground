@@ -11,9 +11,9 @@ jobs:
       - uses: actions/checkout@v2 # access repo files
 
       - name: Pandoc
-        uses: docker://pandoc/core:2.9
+        uses: docker://pandoc/latex:2.9
         with:
-          args: pandoc -d PandocDefaults.yml -o artifact/build-${{ github.run_number }}.html
+          args: -d PandocDefaults.yml -o artifact/build-${{ github.run_number }}.pdf
 
       - name: UploadArtifact
         uses: actions/upload-artifact@master
@@ -22,10 +22,10 @@ jobs:
           path: artifact
 
       - name: Release
-        uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v1
         with:
-          files: artifact/build-${{ github.run_number }}.html
+          files: artifact/build-${{ github.run_number }}.pdf
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
