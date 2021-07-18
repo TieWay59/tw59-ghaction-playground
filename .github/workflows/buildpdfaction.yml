@@ -6,7 +6,6 @@ on:
 
 jobs:
   convert_via_pandoc:
-    if: ${{ !startsWith(github.ref, 'refs/tags/') }}
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2 # access repo files
