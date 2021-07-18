@@ -5,34 +5,37 @@ on:
   push:
 
 jobs:
-  make_release:
-    if: startsWith(github.ref, 'refs/tags/')
-    runs-on: ubuntu-18.04
-    steps:
-      - uses: actions/checkout@v2 # access repo files
-      - name: Release
-        uses: softprops/action-gh-release@v1
-        with:
-          files: artifact/build-${{ github.run_id }}.html
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   convert_via_pandoc:
     if: ${{ !startsWith(github.ref, 'refs/tags/') }}
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2 # access repo files
-      - run: stamp=$(date +"%Y-%m-%d.H:%M:%S")
-      - uses: docker://pandoc/core:2.9
+
+      - name: Pandoc
+        uses: docker://pandoc/core:2.9
         with:
-          args: pandoc -d PandocDefaults.yml -o artifact/build-${{ github.run_id }}.html
-      - uses: actions/upload-artifact@master
+          args: pandoc -d PandocDefaults.yml -o artifact/build-${{ github.run_number }}.html
+
+      - name: UploadArtifact
+        uses: actions/upload-artifact@master
         with:
-          name: build-${{ github.run_id }}
+          name: build-${{ github.run_number }}
           path: artifact
-      - name: push new file
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: artifact/build-${{ github.run_number }}.html
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: PushCommit
+        if: ${{ !startsWith(github.ref, 'refs/tags/') }}
         run: |
           git config user.name TieWay59
           git config user.email tieway59@foxmail.com
           git add .
-          git commit -m "action run_id ${{ github.run_id }}"
+          git commit -m "action run_number ${{ github.run_number }}"
           git push
+          
