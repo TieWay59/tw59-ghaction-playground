@@ -13,7 +13,7 @@ jobs:
       - name: Pandoc
         uses: docker://pandoc/latex:2.9
         with:
-          args: -d PandocDefaults.yml -o artifact/build-${{ github.run_number }}.pdf
+          args: -d PandocDefaults.yml -o artifact/build-${{ github.run_number }}.pdf --template eisvogel --number-sections
 
       - name: UploadArtifact
         uses: actions/upload-artifact@master
