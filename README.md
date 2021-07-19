@@ -47,7 +47,7 @@ tlmgr install ctex # 官方镜像里的ctexhook有异常，得重装一下ctex�
 > `-i` 交互模式(即使没有附加也保持 STDIN 打开)
 >
 > `-t` 分配伪 TTY
-
+>
 > `chmod 777 <file>` 授予执行权限。
 
 ### Alpine 中文字体安装

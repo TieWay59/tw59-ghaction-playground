@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2 # access repo files
 
-      - name: PandocLatex
+      - name: Pan
         uses: ./
         with:
           args: >-
