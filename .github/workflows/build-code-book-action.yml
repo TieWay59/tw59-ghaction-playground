@@ -15,24 +15,24 @@ jobs:
         uses: ./
         with:
           args: >-
-              pandoc assets/test-2-ACM.md
-              -o artifact/build.pdf
+            pandoc assets/test-1.md 
+              -o build-1.pdf 
               --from markdown 
               --template eisvogel.latex 
-              --shift-heading-level-by=-1 
               --resource-path=assets 
               --number-sections 
-              --highlight-style monochrome 
               --top-level-division=chapter 
+              --shift-heading-level-by=-1 
+              --highlight-style monochrome 
               --pdf-engine "xelatex" 
               --toc 
               -V CJKmainfont="Noto Serif CJK SC" 
               -V toc-own-page="true" 
-              -V book 
-              -V titlepage="true" 
-              -V titlepage-color="FFFFFF" 
-              -V code-block-font-size="\normalsize" 
-              -V titlepage-rule-height="0"
+              -V book
+              -V code-block-font-size="\normalsize"
+              -V title="代码模板"
+              -V author="Tieway59"
+              -V date="2017-02-20"
 
       - name: UploadArtifact
         uses: actions/upload-artifact@master
