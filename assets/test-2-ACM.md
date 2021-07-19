@@ -2565,11 +2565,11 @@ $$
 $$
 
 $$
-(a+b)^\alpha=\sum_{i=0}^{\infin}\binom{\alpha}{i}a^{\alpha-i}b^{i},其中\binom {\alpha}{i}=\frac{(\alpha)\cdot(\alpha-1)\cdots(\alpha-i+1)}{i!}
+(a+b)^\alpha=\sum_{i=0}^{\infty}\binom{\alpha}{i}a^{\alpha-i}b^{i},其中\binom {\alpha}{i}=\frac{(\alpha)\cdot(\alpha-1)\cdots(\alpha-i+1)}{i!}
 $$
 
 $$
-(a+b)^{-\alpha}=\sum_{i=0}^{\infin}\binom{-\alpha}{i}a^{\alpha-i}b^i=\sum_{i=0}^{\infin}(-1)^i\binom{\alpha+i-1}{i}a^{\alpha-i}b^i
+(a+b)^{-\alpha}=\sum_{i=0}^{\infty}\binom{-\alpha}{i}a^{\alpha-i}b^i=\sum_{i=0}^{\infty}(-1)^i\binom{\alpha+i-1}{i}a^{\alpha-i}b^i
 $$
 
 #### 6.常用组合数公式
@@ -2849,18 +2849,18 @@ C(x)=\frac{1-\sqrt{1-4x}}{2x}\\
 $$
 
 $$
-(1-4x)^{\frac12}=\sum_{i=0}^\infin\binom{\frac12}{i}(-4x)^i\\
-=1+\sum_{i=1}^\infin\frac{\frac12\cdot(-\frac12)\cdot(-\frac32)\cdots(-\frac{2i-3}{2})}{i!}(-4)^ix^i\\
-=1+\sum_{i=1}^\infin \frac{1\cdot3\cdots(2i-3)}{2^ii!}(-1)^{2i-1}4^ix^i\\
-=1-\sum_{i=1}^\infin \frac{(2i-2)!}{2^ii!\cdot(2\cdot4\cdots(2i-2))}4^ix^i\\
-=1-\sum_{i=1}^\infin \frac{(2i-2)!}{2^ii!\cdot2^{i-1}\cdot(i-1)!}4^ix^i\\
-=1-\sum_{i=1}^\infin\frac{2\cdot(2i-2)!}{i!(i-1)!}x^i\\
+(1-4x)^{\frac12}=\sum_{i=0}^\infty\binom{\frac12}{i}(-4x)^i\\
+=1+\sum_{i=1}^\infty\frac{\frac12\cdot(-\frac12)\cdot(-\frac32)\cdots(-\frac{2i-3}{2})}{i!}(-4)^ix^i\\
+=1+\sum_{i=1}^\infty \frac{1\cdot3\cdots(2i-3)}{2^ii!}(-1)^{2i-1}4^ix^i\\
+=1-\sum_{i=1}^\infty \frac{(2i-2)!}{2^ii!\cdot(2\cdot4\cdots(2i-2))}4^ix^i\\
+=1-\sum_{i=1}^\infty \frac{(2i-2)!}{2^ii!\cdot2^{i-1}\cdot(i-1)!}4^ix^i\\
+=1-\sum_{i=1}^\infty\frac{2\cdot(2i-2)!}{i!(i-1)!}x^i\\
 $$
 
 $$
-C(x)=\frac{1-\sqrt {1-4x}}{2x}=\frac{1-1+\sum_{i=1}^\infin\frac{2\cdot(2i-2)!}{i!(i-1)!}x^i}{2x}\\
-=\sum_{i=1}^\infin\frac{(2i-2)!}{i!(i-1)!}x^{i-1}=\sum_{i=1}^\infin\frac{(2i-2)!}{i\cdot(i-1)!(i-1)!}x^{i-1}\\
-=\sum_{i=1}^\infin\frac{1}{i}C_{2i-2}^{i-1}x^{i-1}=\sum_{i=0}^\infin \frac{C_{2i}^{i}}{i+1}x^i\\
+C(x)=\frac{1-\sqrt {1-4x}}{2x}=\frac{1-1+\sum_{i=1}^\infty\frac{2\cdot(2i-2)!}{i!(i-1)!}x^i}{2x}\\
+=\sum_{i=1}^\infty\frac{(2i-2)!}{i!(i-1)!}x^{i-1}=\sum_{i=1}^\infty\frac{(2i-2)!}{i\cdot(i-1)!(i-1)!}x^{i-1}\\
+=\sum_{i=1}^\infty\frac{1}{i}C_{2i-2}^{i-1}x^{i-1}=\sum_{i=0}^\infty \frac{C_{2i}^{i}}{i+1}x^i\\
 C_n=\frac{C_{2n}^n}{n+1}
 $$
 
@@ -2887,7 +2887,7 @@ $$
 
 $$
 r(x)*g(x)*y(x)*b(x)=\frac{(e^x-e^{-x})^2e^{2x}}{4}=\frac{e^{4x}-2e^{2x}+1}{4}\\
-=\frac{1+\sum_{i=0}^\infin\frac{(4x)^i-2(2x)^i}{i!}}{4}=\frac14+\sum_{i=0}^\infin\frac{4^i-2^{i+1}}{4}\cdot\frac{x^i}{i!}\\
+=\frac{1+\sum_{i=0}^\infty\frac{(4x)^i-2(2x)^i}{i!}}{4}=\frac14+\sum_{i=0}^\infty\frac{4^i-2^{i+1}}{4}\cdot\frac{x^i}{i!}\\
 $$
 
 ​ 于是答案就是$\frac{4^n-2^{n+1}+[n==0]}{4}$
