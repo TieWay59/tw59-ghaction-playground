@@ -15,7 +15,7 @@ jobs: # ${{steps.date.outputs.date}}
         with:
           args: >-
               pandoc assets/test-1.md 
-              -o build-1.pdf 
+              -o artifact/build-${{ github.run_number }}.pdf 
               --from markdown 
               --template eisvogel.latex 
               --shift-heading-level-by=-1 
@@ -39,7 +39,7 @@ jobs: # ${{steps.date.outputs.date}}
         uses: actions/upload-artifact@master
         with:
           name: build-${{ github.run_number }}
-          path: artifact
+          path: artifact/build-${{ github.run_number }}.pdf
 
       - name: Release
         if: startsWith(github.ref, 'refs/tags/')
