@@ -4,16 +4,36 @@ on:
   workflow_dispatch:
   push:
 
-jobs:
+jobs: # ${{steps.date.outputs.date}}
   convert_via_pandoc:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2 # access repo files
 
       - name: Pandoc
-        uses: docker://pandoc/latex:2.9
+        uses: ./docker/pandoc-latex-eisvogel
         with:
-          args: -d PandocDefaults.yml -o artifact/build-${{ github.run_number }}.pdf --template eisvogel --number-sections
+          args: >-
+              pandoc assets/test-1.md 
+              -o build-1.pdf 
+              --from markdown 
+              --template eisvogel.latex 
+              --shift-heading-level-by=-1 
+              --resource-path=assets 
+              --number-sections 
+              --highlight-style monochrome 
+              --top-level-division=chapter 
+              --pdf-engine "xelatex" 
+              --toc 
+              -V CJKmainfont="Noto Serif CJK SC" 
+              -V toc-own-page="true" 
+              -V book 
+              -V titlepage="true" 
+              -V titlepage-color="FFFFFF" 
+              -V code-block-font-size="\normalsize" 
+              -V titlepage-rule-height="0"
+
+# -d PandocDefaults.yml -o artifact/build-${{ github.run_number }}.pdf --template eisvogel --number-sections
 
       - name: UploadArtifact
         uses: actions/upload-artifact@master

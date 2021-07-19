@@ -1,0 +1,5 @@
+name: 'pandoc-latex-eisvogel'
+description: 'docker://pandoc/latex:2.9 with eisvogel needed packages and CJK fonts'
+runs:
+  using: 'docker'
+  image: 'docker/Dockerfile'
