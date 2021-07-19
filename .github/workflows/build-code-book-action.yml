@@ -43,7 +43,7 @@ jobs:
       - name: PushCommit
         if: ${{ !startsWith(github.ref, 'refs/tags/') }}
         run: |
-          cp artifact/build.pdf backup/build-${{ github.run_number }}.pdf
+          cp artifact/build.pdf backups/build-${{ github.run_number }}.pdf
           git config user.name TieWay59
           git config user.email tieway59@foxmail.com
           git add .
