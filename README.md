@@ -22,6 +22,7 @@ git push --tags
 - [ ] `softprops/action-gh-release@v1` 和 `git push` 存在顺序冲突，后一项执行会报错。
 - [ ] KaTeX 支持两种无穷的写法，`\infin`和`\infty`。其中前者会在 xelatex 变异的时候报错`Undefined control sequence`，这就说明潜在很多兼容性问题了。
 - [ ] 行内公式内侧`$`与公式之间不要有空格，否则不会被解析成行内公式。
+- [ ] 公式内`\begin{align}`存在问题，不确定 `\begin{align*}` \begin{aligned}行不行。
 - [ ] 主线任务：把 md 文档，按照某种良好的模板（解决中文字体，代码排版等问题），借助 pandoc 和 GitHub Action，自动转换成 pdf 打印材料。
 
 目前正在 GitHub Action 执行流程层面进行探索。
