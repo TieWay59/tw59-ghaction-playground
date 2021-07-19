@@ -2,7 +2,7 @@ name: build code book
 
 on:
   workflow_dispatch:
-  # push:
+  push:
 
 jobs:
   convert:
