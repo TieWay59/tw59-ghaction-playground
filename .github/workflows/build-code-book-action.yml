@@ -16,23 +16,23 @@ jobs:
         with:
           args: >-
             pandoc assets/test-1.md 
-              -o artifact/build.pdf
-              --from markdown 
-              --template eisvogel.latex 
-              --resource-path=assets 
-              --number-sections 
-              --top-level-division=chapter 
-              --shift-heading-level-by=-1 
-              --highlight-style monochrome 
-              --pdf-engine "xelatex" 
-              --toc 
-              -V CJKmainfont="Noto Serif CJK SC" 
-              -V toc-own-page="true" 
-              -V book
-              -V code-block-font-size="\normalsize"
-              -V title="代码模板"
-              -V author="Tieway59"
-              -V date="2017-02-20"
+            -o artifact/build.pdf
+            --from markdown 
+            --template eisvogel.latex 
+            --resource-path=assets 
+            --number-sections 
+            --top-level-division=chapter 
+            --shift-heading-level-by=-1 
+            --highlight-style monochrome 
+            --pdf-engine "xelatex" 
+            --toc 
+            -V CJKmainfont="Noto Serif CJK SC" 
+            -V toc-own-page="true" 
+            -V book
+            -V code-block-font-size="\normalsize"
+            -V title="代码模板"
+            -V author="Tieway59"
+            -V date="2017-02-20"
 
       - name: UploadArtifact
         uses: actions/upload-artifact@master

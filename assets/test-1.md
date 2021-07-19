@@ -1,10 +1,3 @@
----
-title: "代码模板"
-author: [Tieway59]
-date: "2017-02-20"
-keywords: [github.com/TieWay59/tw59-ghaction-playground]
----
-
 ## [ZJNU - 2268](http://10.7.88.76/CLanguage/showproblem?problem_id=2268) 0/1 分数规划
 
 ### 题意
