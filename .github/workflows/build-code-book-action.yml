@@ -13,7 +13,7 @@ jobs:
 
       - name: Get current date
         id: date
-        run: echo "::set-output name=date::$(date +'%Y-%m-%d_%H:%M:%S')"
+        run: echo "::set-output name=date::$(date +'%Y-%m-%d %H:%M:%S')"
 
       - name: PandocLatex
         uses: ./
@@ -47,11 +47,11 @@ jobs:
       - name: PushCommit
         if: ${{ !startsWith(github.ref, 'refs/tags/') }}
         run: |
-          cp artifact/build.pdf backups/build_${{ steps.date.outputs.date }}.pdf
+          cp artifact/build.pdf "backups/build ${{ steps.date.outputs.date }}.pdf"
           git config user.name TieWay59
           git config user.email tieway59@foxmail.com
           git add .
-          git commit -m "CI: produce build-${{ steps.date.outputs.date }}.pdf"
+          git commit -m "CI: produce build ${{ steps.date.outputs.date }}.pdf"
           git push
 
   release:
