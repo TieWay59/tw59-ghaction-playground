@@ -1,4 +1,4 @@
-name: Simple Usage
+name: build code book
 
 on:
   workflow_dispatch:
@@ -17,7 +17,7 @@ jobs:
         with:
           args: >-
               pandoc assets/test-1.md 
-              -o ${{ Outputfile }} 
+              -o $Outputfile 
               --from markdown 
               --template eisvogel.latex 
               --shift-heading-level-by=-1 
