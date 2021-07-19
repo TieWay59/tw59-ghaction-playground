@@ -11,6 +11,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2 # access repo files
 
+      - name: Get current date
+        id: date
+        run: echo "::set-output name=date::$(date +'%Y-%m-%d %H:%M:%S')"
+
       - name: PandocLatex
         uses: ./
         with:
@@ -32,7 +36,7 @@ jobs:
             -V code-block-font-size="\normalsize"
             -V title="代码模板"
             -V author="Tieway59"
-            -V date="2017-02-20"
+            -V date="${{ steps.date.outputs.date }}"
 
       - name: UploadArtifact
         uses: actions/upload-artifact@master
@@ -43,11 +47,11 @@ jobs:
       - name: PushCommit
         if: ${{ !startsWith(github.ref, 'refs/tags/') }}
         run: |
-          cp artifact/build.pdf backups/build-${{ github.run_number }}.pdf
+          cp artifact/build.pdf backups/build-${{steps.date.outputs.date }}.pdf
           git config user.name TieWay59
           git config user.email tieway59@foxmail.com
           git add .
-          git commit -m "CI: produce build-${{ github.run_number }}.pdf"
+          git commit -m "CI: produce build-${{ steps.date.outputs.date }}.pdf"
           git push
   release:
     if: startsWith(github.ref, 'refs/tags/')
