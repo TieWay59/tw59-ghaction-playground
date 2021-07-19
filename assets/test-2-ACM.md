@@ -2669,14 +2669,14 @@ void init(){
 ​将 n 个不同元素构成到 k 个圆排列的方案数
 
 $$
-\begin{align*}
+\begin{aligned}
 &(1)  \begin{bmatrix} n\\k \end{bmatrix}=s(n,k)->s_u(n,k)  \\
 &(2)s(n,k)=s(n-1,k-1)+(n-1)\cdot s(n-1,k)\\
 &(3)s(n,k)=\begin{cases}0 &  n < k \\ 1 & n=k \\ 0 & n > 0 \ ∧\ k=0 \end{cases}\\
 &(4)s_s(n,k)=(-1)^{n-k}s_u(n,k)\\
 &(5)x^{\overline n}=(x)(x+1)(x+2)\cdots(x+n-1)=\sum_{i=1}^{n}s_u(n,i)x^i\\
 &(6)x^{\underline n}=(x)(x-1)(x-2)\cdots(x-n+1)=\sum_{i=1}^{n}(-1)^{n-k}s_u(n,i)x^i=\sum_{i=1}^{n}s_s(n,i)x^i\\
-\end{align*}
+\end{aligned}
 $$
 
 #### 5.第二类斯特林数
@@ -2684,14 +2684,14 @@ $$
 ​ n 个不同元素划分到恰好 k 个非空集合的方案数（n 个不同小球放入 k 个相同盒子，不能有空盒）
 
 $$
-\begin{align*}
+\begin{aligned}
 
 &(1)\begin{Bmatrix}n\\k\end{Bmatrix}=S(n,k)\\
  &(2)S(n,k)=S(n-1,k-1)+kS(n-1,k)\\
  &(3)s(n,k)=\begin{cases}0 &  n < k \\ 1 & n=k \\ 0 & n > 0\ ∧\ k=0 \end{cases}\\
  &(4)x^n=\sum_{i=0}^nS(n,i)x^{\underline i}\\
  &(5)Bell_n=\sum_{i=1}^kS(n,i)\\
-\end{align*}
+\end{aligned}
 $$
 
 ​ 关于斯特林数，建议阅读<https://www.cnblogs.com/Iking123/p/13308661.html>
@@ -3591,7 +3591,7 @@ $$
 通过带入和化简，最后可以这样求：
 
 $$
-\begin{align*}
+\begin{aligned}
 a &= x_1-x_2\\
 b &= y_1-y_2\\
 c &= x_1-x_3\\
@@ -3601,7 +3601,7 @@ f &= (x_1^2 - x_3^2 + y_1^2 - y_3^2)\div 2 \\
 \\
 x_0 &= \frac{d e - b f}{a d - b c}\\
 y_0 &= \frac{a f - c e}{a d - b c}
-\end{align*}
+\end{aligned}
 $$
 
 ```cpp
