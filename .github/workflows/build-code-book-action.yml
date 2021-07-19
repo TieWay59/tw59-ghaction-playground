@@ -11,12 +11,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2 # access repo files
 
-      - name: Pan
+      - name: PandocLatex
         uses: ./
         with:
           args: >-
             pandoc assets/test-1.md 
-              -o build-1.pdf 
+              -o artifact/build.pdf
               --from markdown 
               --template eisvogel.latex 
               --resource-path=assets 
