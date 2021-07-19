@@ -2,11 +2,13 @@ name: Simple Usage
 
 on:
   workflow_dispatch:
-  push:
+  # push:
 
-jobs: # ${{steps.date.outputs.date}}
+jobs:
   convert_via_pandoc:
     runs-on: ubuntu-18.04
+    env:
+      Outputfile: "artifact/build-${{ github.run_number }}.pdf" 
     steps:
       - uses: actions/checkout@v2 # access repo files
 
@@ -15,7 +17,7 @@ jobs: # ${{steps.date.outputs.date}}
         with:
           args: >-
               pandoc assets/test-1.md 
-              -o artifact/build-${{ github.run_number }}.pdf 
+              -o ${{ Outputfile }} 
               --from markdown 
               --template eisvogel.latex 
               --shift-heading-level-by=-1 
@@ -32,8 +34,6 @@ jobs: # ${{steps.date.outputs.date}}
               -V titlepage-color="FFFFFF" 
               -V code-block-font-size="\normalsize" 
               -V titlepage-rule-height="0"
-
-# -d PandocDefaults.yml -o artifact/build-${{ github.run_number }}.pdf --template eisvogel --number-sections
 
       - name: UploadArtifact
         uses: actions/upload-artifact@master
