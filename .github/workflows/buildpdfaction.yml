@@ -11,7 +11,7 @@ jobs: # ${{steps.date.outputs.date}}
       - uses: actions/checkout@v2 # access repo files
 
       - name: Pandoc
-        uses: ./docker/pandoc-latex-eisvogel
+        uses: ./docker
         with:
           args: >-
               pandoc assets/test-1.md 
