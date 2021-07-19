@@ -10,15 +10,13 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2 # access repo files
-      - name: MoveOldFiles
-        run: mv -f ./artifact/*.pdf ./backups
 
       - name: PandocLatex
         uses: ./
         with:
           args: >-
               pandoc assets/test-1.md 
-              -o artifact/build-${{ github.run_number }}.pdf
+              -o artifact/build.pdf
               --from markdown 
               --template eisvogel.latex 
               --shift-heading-level-by=-1 
@@ -45,6 +43,7 @@ jobs:
       - name: PushCommit
         if: ${{ !startsWith(github.ref, 'refs/tags/') }}
         run: |
+          cp artifact/build.pdf backup/build-${{ github.run_number }}.pdf
           git config user.name TieWay59
           git config user.email tieway59@foxmail.com
           git add .
@@ -57,6 +56,6 @@ jobs:
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
-          files: artifact/*.pdf
+          files: artifact/build.pdf
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
