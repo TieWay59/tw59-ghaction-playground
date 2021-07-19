@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2 # access repo files
-      - run: mv -f artifact/*.pdf backups
+      - run: mv -f ./artifact/*.pdf ./backups
 
       - name: Pandoc
         uses: ./
@@ -54,6 +54,6 @@ jobs:
           git config user.name TieWay59
           git config user.email tieway59@foxmail.com
           git add .
-          git commit -m "CI: produce build-${{ github.run_number }}.pdf"
+          git commit -m "CI: produce `build-${{ github.run_number }}.pdf`"
           git push
           
