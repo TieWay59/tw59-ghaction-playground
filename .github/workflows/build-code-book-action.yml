@@ -4,8 +4,8 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - '.github/workflows'
-      - 'assets'
+      - 'main/.github/workflows'
+      - 'main/assets'
     tags:        
       - v*             # Push events to v1 tag
 
