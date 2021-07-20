@@ -1004,9 +1004,9 @@ bool InsidePolygon(Point A) {
 }
 ```
 
-#### 数据结构
+## 数据结构
 
-##### zhuxishu_SegKth.cpp
+### zhuxishu_SegKth.cpp
 
 ```cpp
 //
@@ -1142,7 +1142,7 @@ int main() {
  */
 ```
 
-##### ZTC's Splay.txt
+### ZTC's Splay.txt
 
 ```txt
 //using namespace std;
