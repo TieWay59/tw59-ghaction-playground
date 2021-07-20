@@ -26,7 +26,7 @@ jobs:
         uses: ./
         with:
           args: >-
-            pandoc assets/test-1.md 
+            pandoc assets/build.md 
             -o artifact/build.pdf
             --from markdown 
             --template eisvogel.latex 
