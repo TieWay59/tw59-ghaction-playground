@@ -24,6 +24,18 @@ git push --tags
 
 ## 配置与问题
 
+### python 脚本
+
+建议最深的文件，深度不要超过三个文件夹：
+
+- 根目录 # 一级标题不会被转化
+  - 第一层文件夹 ## 对应 chapter
+    - 第二层文件夹 ### 对应 section
+      - 第三层文件夹 #### 对应 subsection
+        - 第四层的文件 ##### 对应 subsubsection
+
+在第四层之后的路径，都会对应使用五级标题。（参考`python/main.py`）
+
 ### Github Action
 
 主要的障碍在于按照官方手册编写配置，官方的语法介绍比较散。需要广泛的操作系统，shell，docker等知识基础。

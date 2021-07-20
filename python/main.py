@@ -1,7 +1,8 @@
 import os
 import os.path as path
 
-dir = '.\\python\\test'
+code_dir = '.\\code'
+output_dir = '.\\assets\\build.md'
 ext_dict = dict(
     {
         'c': 'cpp',
@@ -19,22 +20,11 @@ def wrapper(lines, ext):
     return ["```{}\n".format(ext)] + lines + ["\n```\n\n"]
 
 
-'''
-建议最深的文件，深度不要超过三个文件夹：
-
-- 根目录 # 一级标题不会被转化
-    - 第一层文件夹 ## 对应 chapter
-        - 第二层文件夹 ### 对应 section
-            - 第三层文件夹 #### 对应 subsection
-                - 第四层的文件 ##### 对应 subsubsection 
-
-*在第四层之后的路径，都会对应使用五级标题*
-'''
 if __name__ == '__main__':
 
-    with open('.\\python\\text.md', 'w+', encoding='utf8') as f:
-        for root, dirs, files in os.walk(dir):
-            root_list = root[len(dir):].split('\\')
+    with open(output_dir, 'w+', encoding='utf8') as f:
+        for root, dirs, files in os.walk(code_dir):
+            root_list = root[len(code_dir):].split('\\')
             f.write('#' * min(5, len(root_list)) +
                     ' ' + root_list[-1] + '\n\n')
             for file in files:
