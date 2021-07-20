@@ -46,7 +46,7 @@ jobs:
             --highlight-style monochrome 
             --pdf-engine "xelatex" 
             --toc 
-            -V CJKmainfont="Noto Sans CJK SC"
+            -V CJKmainfont="Noto Sans Mono CJK SC"
             -V toc-own-page="true" 
             -V book
             -V code-block-font-size="\normalsize"
