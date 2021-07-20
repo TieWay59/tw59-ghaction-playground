@@ -13,23 +13,19 @@ on:
       - v*             # Push events to v1 tag
 
 jobs:
-  dump:
-    if: ${{ !startsWith(github.ref, 'refs/tags/') }}
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
-        with:
-          python-version: '3.7' # Version range or exact version of a Python version to use, using SemVer's version range syntax
-          architecture: 'x64' # optional x64 or x86. Defaults to x64 if not specified
-      - run: python python/main.py
-
   convert:
     if: ${{ !startsWith(github.ref, 'refs/tags/') }}
     needs: dump
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2 # access repo files
+
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.7' # Version range or exact version of a Python version to use, using SemVer's version range syntax
+          architecture: 'x64' # optional x64 or x86. Defaults to x64 if not specified
+      - name: DumpMarkdown 
+        run: python python/main.py
 
       - name: Get current date
         id: date
