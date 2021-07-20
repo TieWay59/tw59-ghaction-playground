@@ -4,8 +4,8 @@ on:
   workflow_dispatch:
   push:
     paths:
-      - ".github/workflows/*"
-      - "assets/*"
+      - '.github/workflows/**'
+      - 'assets/**'
     tags:        
       - v*             # Push events to v1 tag
 
