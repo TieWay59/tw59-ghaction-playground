@@ -3,6 +3,11 @@ name: build code book
 on:
   workflow_dispatch:
   push:
+    branches:
+      - '.github/workflows'
+      - 'assets'
+    tags:        
+      - v*             # Push events to v1 tag
 
 jobs:
   convert:
