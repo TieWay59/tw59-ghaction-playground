@@ -8,12 +8,25 @@ on:
     paths:
       - '.github/workflows/**.yml'
       - 'assets/**'
+      - 'code/**'
     tags:        
       - v*             # Push events to v1 tag
 
 jobs:
+  dump:
+    if: ${{ !startsWith(github.ref, 'refs/tags/') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.7' # Version range or exact version of a Python version to use, using SemVer's version range syntax
+          architecture: 'x64' # optional x64 or x86. Defaults to x64 if not specified
+      - run: python python/main.py
+
   convert:
     if: ${{ !startsWith(github.ref, 'refs/tags/') }}
+    needs: dump
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2 # access repo files
@@ -34,8 +47,7 @@ jobs:
             --number-sections 
             --top-level-division=chapter 
             --shift-heading-level-by=-1 
-            --listings
-            # --highlight-style monochrome 
+            --highlight-style monochrome 
             --pdf-engine "xelatex" 
             --toc 
             -V CJKmainfont="Noto Serif CJK SC" 
@@ -56,6 +68,7 @@ jobs:
         if: ${{ !startsWith(github.ref, 'refs/tags/') }}
         run: |
           cp artifact/build.pdf backups/${{ steps.date.outputs.date }}-build${{ github.run_number }}.pdf
+          cp assets/build.md backups/${{ steps.date.outputs.date }}-build${{ github.run_number }}.md
           git config user.name TieWay59
           git config user.email tieway59@foxmail.com
           git add .
