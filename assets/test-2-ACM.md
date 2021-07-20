@@ -2,14 +2,13 @@
 
 ## 0/1 分数规划
 
-### 题意 [ZJNU - 2268](http://10.7.88.76/CLanguage/showproblem?problem_id=2268) 
+### 题意 [ZJNU - 2268](http://10.7.88.76/CLanguage/showproblem?problem_id=2268)
 
 给$n$个对象的$w_i$值和$t_i$值，和重量下界$W$ ，取其中任意个对象，求：
 
 $$
 Max(\frac{\sum t_k \times 1000}{\sum w_k})(\sum w_k>W,k\in\{1\dots N \})
 $$
-
 
 ### 代码
 
@@ -204,12 +203,11 @@ Hull<> hull;
 
 ```
 
-## 随意的标题1
+## 随意的标题 1
 
-### 随意的标题2
+### 随意的标题 2
 
 一点随意的内容。
-
 
 ### 思路
 
