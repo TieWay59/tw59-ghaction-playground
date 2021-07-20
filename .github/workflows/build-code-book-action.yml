@@ -38,7 +38,7 @@ jobs:
             pandoc assets/build.md 
             -o artifact/build.pdf
             --from markdown 
-            --template eisvogel.latex 
+            --template template/eisvogel.latex 
             --resource-path=assets 
             --number-sections 
             --top-level-division=chapter 
