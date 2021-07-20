@@ -2,18 +2,33 @@
 
 ![build pdf action](https://github.com/TieWay59/tw59-ghaction-playground/actions/workflows/buildpdfaction.yml/badge.svg)
 
-主线任务：把 md 文档，按照某种良好的模板（解决中文字体，代码排版等问题），借助 pandoc 和 GitHub Action，自动转换成 pdf 打印材料。
+本项目是一个，可以把代码目录，整合成 md 文档，再按照某种良好的模板（解决中文字体，代码排版等问题），借助 pandoc 和 GitHub Action，自动转换成 pdf 打印材料。
+
+本项目不需要特殊环境，只需维护自己的`./code`目录，项目预设的工作流就会借用 github 的服务器自动帮你构建代码参考书的打印材料。
 
 ## 代办
 
 - [x] 完成基本上述功能。
 - [ ] 编写使用手册，对脚本进行注释。
 - [ ] 考虑正确得分离“操作”和项目本体。
-- [ ] 考虑编写代码文件打包的脚本。
+- [x] 考虑编写代码文件打包的脚本。
 
-## 使用用例
+## 使用说明
 
-在本仓库普通 push 的时候，会自动构建书本pdf，存入 Artifact。并且能够上传到仓库里的备份文件夹。
+### 文件路径说明
+
+- aritifact : 每次转换作业结束，会提交一份 build.pdf 到此目录下，作为本次作业的最终结果。在使用版本管理软件的时候，记得提交前拉取这一流水线的提交。
+- assets : 每次转换作业结束，会把`code`文件夹下的所有代码，按照`python/main.py`生成的 build.md 文件提交到此处。
+- backups : 每次作业的产品，会被拷贝一份附上时间戳，提交到本目录下，作为备份。可以定期删除较老的版本。如果完全不需要备份，请修改工作流配置文件。
+- code : 存放代码库的目录，请以这个文件夹为根目录。本目录下的任何文件名和子目录名，都是最终结果里的一级标题。
+- python : 存放一个 python 脚本，用于对代码进行打包。如果有特殊的内容需求，可以在这份脚本中定制。
+- template : pandoc 构建用到的模板文件，来源是：[eisvogel](https://github.com/Wandmalfarbe/pandoc-latex-template)
+
+### 简单使用教程
+
+fork 仓库到自己的账户下。
+
+把`code`路径下的文件换成自己的，然后 push，等待 github action 工作完毕。
 
 在本仓库 push tag 的时候，自动把`Artifac/build.pdf`上传 GitHub Release。以下是对当前 commit 做标记的示例（[git tag 详细文档](https://git-scm.com/book/zh/v2/Git-%E5%9F%BA%E7%A1%80-%E6%89%93%E6%A0%87%E7%AD%BE)）：
 
@@ -22,13 +37,13 @@ git tag -a v0.0.8 -m "my version 0.0.8"
 git push --tags
 ```
 
-## 配置与问题
+### 使用注意事项
 
-### python 脚本
+#### 文件深度
 
 建议最深的文件，深度不要超过三个文件夹：
 
-- 根目录 # 一级标题不会被转化
+- 根目录 code # 一级标题不会被转化
   - 第一层文件夹 ## 对应 chapter
     - 第二层文件夹 ### 对应 section
       - 第三层文件夹 #### 对应 subsection
@@ -36,9 +51,23 @@ git push --tags
 
 在第四层之后的路径，都会对应使用五级标题。（参考`python/main.py`）
 
+#### 代码块溢出
+
+一些压行过长的代码会在pdf中发生溢出，这时候我推荐使用vscode打开项目，复制pdf中表现异常的代码片段，借助vscode的项目全局搜索找到这个代码，改一下折行，一劳永逸。
+
+这个过程不会很麻烦，只要平时习惯良好，这种额外的修改不用做很多次。
+
+BTW 代码良好的排版，可以有效提升在打印材料上的阅读体验。
+
+### 开发教程
+
+leave todo
+
+## 配置与问题
+
 ### Github Action
 
-主要的障碍在于按照官方手册编写配置，官方的语法介绍比较散。需要广泛的操作系统，shell，docker等知识基础。
+主要的障碍在于按照官方手册编写配置，官方的语法介绍比较散。需要广泛的操作系统，shell，docker 等知识基础。
 
 ### 配置 latex 环境
 
@@ -95,7 +124,7 @@ fc-list     # 查看本地字体列表本行不用写入 Dockerfile
 
 - 公式内的`\begin{matrix}\end{matrix}`前后要用`$`包裹。
 
-- 公式内的中文需要用`\mbox{<内容>}`包裹的，但是typora的MathJax.js 或者 KaTeX.js 的脚本可以处理没有包裹的中文，所以很多人会有随便的习惯。
+- 公式内的中文需要用`\mbox{<内容>}`包裹的，但是 typora 的 MathJax.js 或者 KaTeX.js 的脚本可以处理没有包裹的中文，所以很多人会有随便的习惯。
 
 ## 参考文献
 
