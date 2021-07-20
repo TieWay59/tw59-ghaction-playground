@@ -9,6 +9,7 @@ on:
       - '.github/workflows/**.yml'
       - 'assets/**'
       - 'code/**'
+      - 'python/**'
     tags:        
       - v*             # Push events to v1 tag
 
