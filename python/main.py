@@ -1,8 +1,8 @@
 import os
 import os.path as path
 
-code_dir = '.\\code'
-output_dir = '.\\assets\\build.md'
+code_dir = './code'
+output_dir = './assets/build.md'
 ext_dict = dict(
     {
         'c': 'cpp',
@@ -24,7 +24,7 @@ if __name__ == '__main__':
 
     with open(output_dir, 'w+', encoding='utf8') as f:
         for root, dirs, files in os.walk(code_dir):
-            root_list = root[len(code_dir):].split('\\')
+            root_list = root[len(code_dir):].split('/')
             f.write('#' * min(5, len(root_list)) +
                     ' ' + root_list[-1] + '\n\n')
             for file in files:
