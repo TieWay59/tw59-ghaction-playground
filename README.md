@@ -2,7 +2,7 @@
 
 ![build pdf action](https://github.com/TieWay59/tw59-ghaction-playground/actions/workflows/buildpdfaction.yml/badge.svg)
 
-本项目是一个，可以把代码目录，整合成 md 文档，再按照某种良好的模板（解决中文字体，代码排版等问题），借助 pandoc 和 GitHub Action，自动转换成 pdf 打印材料。
+本项目可以把代码目录，整合成 md 文档，再按照某种良好的模板（解决中文字体，代码排版等问题），借助 pandoc 和 GitHub Action，自动转换成 pdf 打印材料。
 
 本项目不需要特殊环境，只需维护自己的`./code`目录，项目预设的工作流就会借用 github 的服务器自动帮你构建代码参考书的打印材料。
 
