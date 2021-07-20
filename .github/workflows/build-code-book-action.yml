@@ -15,7 +15,6 @@ on:
 jobs:
   convert:
     if: ${{ !startsWith(github.ref, 'refs/tags/') }}
-    needs: dump
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2 # access repo files
