@@ -3,9 +3,9 @@ name: build code book
 on:
   workflow_dispatch:
   push:
-    branches:
-      - 'main/.github/workflows'
-      - 'main/assets'
+    paths:
+      - ".github/workflows/*"
+      - "assets/*"
     tags:        
       - v*             # Push events to v1 tag
 
