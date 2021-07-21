@@ -1,5 +1,6 @@
 #include <bits/stdc++.h>
-// using namespace std;
+
+using namespace std;
 typedef long long ll;
 typedef double    db;
 #define _Zero(a)   memset(a, 0, sizeof(a))
