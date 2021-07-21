@@ -522,15 +522,15 @@ void flush() { output->flush(); }
 const int N = 1001;
 int num, m;
 char s[N][N];
-int a[N], warrior[N];
+int a[N], b[N];
 
 int main() {
     input.reset(new InputFile(stdin, false));
     output.reset(new OutputFile());
 
-    read(num, m, s, num, a, num, warrior, m);
+    read(num, m, s, num, a, num, b, m);
     writeln(num, m, '\num', setDelimiter("\num"), s, num);
-    writeln(setDelimiter(", "), a, num, '\num', warrior, m);
+    writeln(setDelimiter(", "), a, num, '\num', b, m);
     return 0;
 }
 
